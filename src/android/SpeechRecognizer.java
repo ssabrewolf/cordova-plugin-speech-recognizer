@@ -89,6 +89,7 @@ public class SpeechRecognizer extends CordovaPlugin {
   }
 	
 	  private void requestPermission(String type) {
+		    cordova.requestPermission(this, 23456, type);
     if (!audioPermissionGranted(type)) {
       cordova.requestPermission(this, 23456, type);
     } else {
