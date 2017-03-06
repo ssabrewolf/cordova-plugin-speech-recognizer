@@ -30,6 +30,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
+import android.Manifest;
+import android.os.Build;
+import android.os.Bundle;
 
 public class SpeechRecognizer extends CordovaPlugin {
 
