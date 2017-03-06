@@ -42,7 +42,7 @@ public class SpeechRecognizer extends CordovaPlugin {
 	private ArrayList<String> results;
 	private String promptMessage;
 	private int maxResults;
-	
+	 private static final String RECORD_AUDIO_PERMISSION = Manifest.permission.RECORD_AUDIO;
 	public SpeechRecognizer(){
 		speechRecognizerCallbackContext= null;
 		promptMessage= null;
@@ -52,6 +52,8 @@ public class SpeechRecognizer extends CordovaPlugin {
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException{		
 		// Check action
 		if( action.equals("recognize") ){
+			
+			this.requestAudioPermission();
 			// Get the reference to the callbacks and parameters
 			this.speechRecognizerCallbackContext= callbackContext;
 			if( args.length() > 0 ){
@@ -78,6 +80,26 @@ public class SpeechRecognizer extends CordovaPlugin {
 		
 		return false;
 	}
+
+	 private void requestAudioPermission() {
+    requestPermission(RECORD_AUDIO_PERMISSION);
+  }
+	
+	  private void requestPermission(String type) {
+    if (!audioPermissionGranted(type)) {
+      cordova.requestPermission(this, 23456, type);
+    } else {
+      this.speechRecognizerCallbackContext.success();
+    }
+  }
+	
+	 private boolean audioPermissionGranted(String type) {
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+      return true;
+    }
+    return cordova.hasPermission(type);
+  }
+	
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		super.onActivityResult(requestCode, resultCode, data);
