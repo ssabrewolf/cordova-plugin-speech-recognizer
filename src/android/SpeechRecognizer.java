@@ -56,7 +56,7 @@ public class SpeechRecognizer extends CordovaPlugin {
 		// Check action
 		if( action.equals("recognize") ){
 			
-			this.requestAudioPermission();
+			//this.requestAudioPermission();
 			// Get the reference to the callbacks and parameters
 			this.speechRecognizerCallbackContext= callbackContext;
 			if( args.length() > 0 ){
