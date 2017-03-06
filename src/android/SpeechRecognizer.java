@@ -26,7 +26,7 @@ import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
-
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
